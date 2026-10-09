@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fytmap — live demo</title>
+<meta name="description" content="Try Fytmap in your browser: AI calorie and macro tracking, workout plans and progress charts.">
+<link rel="icon" type="image/png" href="app/favicon.png">
+<style>
+  :root { --bg:#0a0a0a; --panel:#141414; --line:#2a2a2a; --ink:#f2f2f2; --soft:#a4a4a4; --lime:#b6ff1a; }
+  * { box-sizing:border-box; }
+  html, body { height:100%; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  .page { min-height:100%; display:flex; align-items:center; justify-content:center; gap:56px; padding:32px 24px; flex-wrap:wrap; }
+  .info { max-width:400px; min-width:0; }
+  .badge { display:inline-block; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--bg); background:var(--lime); padding:4px 10px; border-radius:99px; font-weight:700; }
+  h1 { font-size:2.2rem; line-height:1.1; margin:16px 0 10px; }
+  p { color:var(--soft); margin:0 0 14px; }
+  .creds { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:20px 0; }
+  .creds h2 { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin:0 0 10px; font-weight:600; }
+  .row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:6px 0; }
+  .row span { color:var(--soft); font-size:13px; flex:none; width:74px; }
+  .row code { font:14px ui-monospace,Menlo,monospace; color:var(--ink); overflow-wrap:anywhere; min-width:0; flex:1; user-select:all; }
+  button { flex:none; background:transparent; color:var(--lime); border:1px solid var(--line); border-radius:8px; padding:5px 10px; font:inherit; font-size:13px; cursor:pointer; }
+  button:hover, button:focus-visible { border-color:var(--lime); outline:none; }
+  ul { color:var(--soft); padding-left:18px; margin:0 0 14px; }
+  .note { font-size:13.5px; }
+  a { color:var(--lime); }
+  .phone { flex:none; width:390px; height:800px; max-height:calc(100vh - 48px); border:10px solid #1c1c1c; border-radius:44px; overflow:hidden; background:#000; box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 0 1px var(--line); }
+  .phone iframe { width:100%; height:100%; border:0; display:block; }
+  .open { display:none; }
+  @media (max-width: 860px) {
+    .phone { display:none; }
+    .open { display:inline-block; background:var(--lime); color:var(--bg); font-weight:700; text-decoration:none; padding:12px 20px; border-radius:12px; margin-top:6px; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <section class="info">
+    <span class="badge">Live demo</span>
+    <h1>Fytmap in your browser</h1>
+    <p>The real app, running against the live backend. Sign in with the demo account to see a week of workouts, a meal plan, logged meals and a weight trend.</p>
+    <div class="creds">
+      <h2>Demo account</h2>
+      <div class="row"><span>Email</span><code id="email">abdelrahmanelfeky680+fytmapdemo@gmail.com</code><button type="button" data-copy="email">Copy</button></div>
+      <div class="row"><span>Password</span><code id="password">FytmapDemo2026</code><button type="button" data-copy="password">Copy</button></div>
+    </div>
+    <ul class="note">
+      <li>The first sign-in can take up to a minute while the server wakes up.</li>
+      <li>This is the mobile app compiled for the web. Camera barcode scanning, Apple Health sync and in-app purchases only exist in the phone build.</li>
+      <li>The account is shared, so data you add is visible to other visitors.</li>
+    </ul>
+    <a class="open" href="app/">Open the app</a>
+    <p class="note">Built by AbdelRahman ElFekky with Flutter and FastAPI.</p>
+  </section>
+  <div class="phone"><iframe src="app/" title="Fytmap app" allow="clipboard-write; camera"></iframe></div>
+</main>
+<script>
+  document.querySelectorAll('button[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var text = document.getElementById(b.dataset.copy).textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        b.textContent = 'Copied';
+        setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+      }).catch(function () {});
+    });
+  });
+</script>
+</body>
+</html>
